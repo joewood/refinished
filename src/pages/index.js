@@ -1,11 +1,11 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Banner from "../components/banner"
-import LatestBlogs from "../components/latestBlog"
-import Countdown from "../components/countdown"
+// import LatestBlogs from "../components/latestBlog"
+// import Countdown from "../components/countdown"
 import StarRatingComponent from "react-star-rating-component"
 
 class IndexPost extends React.Component {
@@ -35,11 +35,11 @@ class IndexPost extends React.Component {
                   <h2>
                     <Link to={`/${items.node.slug}`}>{items.node.name}</Link>
                   </h2>
-                  <StarRatingComponent
+                  {/* <StarRatingComponent
                     name="rate1"
                     starCount={5}
                     value={items.node.rating}
-                  />
+                  /> */}
                   <p>{items.node.details.childMarkdownRemark.excerpt}</p>
                   <div className="row">
                     <div className="col-sm-4 align-self-center">
@@ -60,7 +60,7 @@ class IndexPost extends React.Component {
                         data-item-url={`/`}
                       >
                         <i className="fas fa-shopping-bag" />
-                        Add to Cart
+                        Contact About Item
                       </a>
                     </div>
                   </div>
@@ -78,14 +78,14 @@ const IndexPage = data => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <Banner BannerData={data.data.allContentfulHeaderBanner.edges} />
-    <LatestBlogs data={data.data.allContentfulBlogs} />
+    {/* <LatestBlogs data={data.data.allContentfulBlogs} /> */}
     <div className="container">
       <div className="text-center">
         <h2 className="with-underline">Latest Items</h2>
       </div>
       <IndexPost data={data}></IndexPost>
     </div>
-    <Countdown data={data.data.contentfulDealCountDown} />
+    {/* <Countdown data={data.data.contentfulDealCountDown} /> */}
   </Layout>
 )
 
@@ -99,7 +99,7 @@ export const query = graphql`
           id
           name
           slug
-          rating
+          #     rating
           image {
             fluid(maxWidth: 1000) {
               base64

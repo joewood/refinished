@@ -1,12 +1,12 @@
-var dotenv = require("dotenv");
-dotenv.config();
+var dotenv = require("dotenv")
+dotenv.config()
 
-const { spaceId, accessToken, snipcart } = process.env;
+const { spaceId, accessToken, snipcart } = process.env
 
 module.exports = {
   siteMetadata: {
-    title: `OneShopper`,
-    description: `E-Commerce site with Gatsby and React`,
+    title: `Refined Refinished`,
+    description: `Restored Furniture`,
     author: `@rohitguptab`,
   },
   plugins: [
@@ -37,8 +37,8 @@ module.exports = {
       resolve: "gatsby-source-contentful",
       options: {
         spaceId,
-        accessToken
-      }
+        accessToken,
+      },
     },
     {
       resolve: "gatsby-plugin-snipcart",
