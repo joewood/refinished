@@ -7,7 +7,7 @@ module.exports = {
   siteMetadata: {
     title: `Refined Refinished`,
     description: `Restored Furniture`,
-    author: `@rohitguptab`,
+    author: `@woodjoe`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,13 +24,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `OneShopper`,
-        short_name: `starter`,
+        name: `RefinedRefinished`,
+        short_name: `refinished`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/oneshopper-logo.png`,
+        icon: `src/images/refined-refinished.png`,
       },
     },
     {

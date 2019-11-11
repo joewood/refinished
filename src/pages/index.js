@@ -6,7 +6,7 @@ import SEO from "../components/seo"
 import Banner from "../components/banner"
 // import LatestBlogs from "../components/latestBlog"
 // import Countdown from "../components/countdown"
-import StarRatingComponent from "react-star-rating-component"
+// import StarRatingComponent from "react-star-rating-component"
 
 class IndexPost extends React.Component {
   constructor(props) {
@@ -76,7 +76,7 @@ class IndexPost extends React.Component {
 
 const IndexPage = data => (
   <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+    <SEO title="Home" keywords={[`furniture`, `shop`, `restored`, `classic`]} />
     <Banner BannerData={data.data.allContentfulHeaderBanner.edges} />
     {/* <LatestBlogs data={data.data.allContentfulBlogs} /> */}
     <div className="container">
