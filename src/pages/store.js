@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-// import StarRatingComponent from "react-star-rating-component"
+import { Item } from "../components/item"
 
 class IndexPost extends React.Component {
     constructor(props) {
@@ -40,70 +40,9 @@ class IndexPost extends React.Component {
         return (
             <React.Fragment>
                 <div className="row product-main" onScroll={this.onScrollEvent}>
-                    {data.data.allContentfulProduct.edges
-                        .slice(0, NoOfPost)
-                        .map(({ node }) => (
-                            <div
-                                className="Catalogue__item col-sm-12 col-md-6 col-lg-4"
-                                key={node.id}
-                            >
-                                <div className="details_List">
-                                    {node.image === null ? (
-                                        <div className="no-image">No Image</div>
-                                    ) : (
-                                        <Img sizes={node.image.fixed} />
-                                    )}
-
-                                    <h2
-                                        style={{
-                                            flex: "0 0 auto",
-                                            paddingTop: 10,
-                                            paddingLeft: 10,
-                                        }}
-                                    >
-                                        <Link to={`/${node.slug}`}>
-                                            {node.name}
-                                        </Link>
-                                    </h2>
-                                    <p
-                                        style={{
-                                            flex: "1 0 auto",
-                                            paddingLeft: 10,
-                                            paddingRight: 10,
-                                        }}
-                                    >
-                                        {
-                                            node.details.childMarkdownRemark
-                                                .excerpt
-                                        }
-                                    </p>
-                                    <div
-                                        style={{
-                                            flex: "0 0 auto",
-                                            display: "flex",
-                                            margin: 10,
-                                            justifyContent: "space-between",
-                                            alignItems: "center",
-                                        }}
-                                    >
-                                        <div style={{ flex: "0 0 auto" }}>
-                                            <span className="price">
-                                                ${node.price || 0}
-                                            </span>
-                                        </div>
-                                        <div style={{ flex: "0 0 auto" }}>
-                                            <a
-                                                href="#"
-                                                className="Product snipcart-add-item"
-                                            >
-                                                <i className="fas fa-shopping-bag" />
-                                                Contact About Item
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                    {data.data.allContentfulProduct.edges.slice(0, NoOfPost).map(({ node }) => (
+                        <Item node={node} />
+                    ))}
                 </div>
             </React.Fragment>
         )
@@ -129,7 +68,6 @@ export const query = graphql`
                     id
                     name
                     slug
-                    #    rating
                     image {
                         fixed(width: 1000, height: 500) {
                             width
