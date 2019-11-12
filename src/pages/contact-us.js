@@ -11,8 +11,13 @@ function encode(data) {
         .join("&")
 }
 
-async function submitFOrm(form, formState) {
+async function submitForm(form, formState) {
     try {
+        const body = encode({
+            "form-name": form.getAttribute("name"),
+            ...formState,
+        })
+        console.log("Bodu " + body)
         const post = await fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -28,21 +33,25 @@ async function submitFOrm(form, formState) {
 }
 
 export default function Contact({ location, ...other }) {
-    const [state, setState] = useState({})
-    const handleChange = useCallback(
-        e => {
-            setState({ ...state, [e.target.name]: e.target.value })
-        },
-        [state]
-    )
     const queryStr = (location.search && q.parse(location.search)) || {}
+    const defaultMessage =
+        (queryStr.name &&
+            `Hi, I'm interested to know more about your ${queryStr.name}. Please contact me on the email address above.`) ||
+        ""
+    const [formState, setFormState] = useState({ message: defaultMessage })
+    const handleChange = useCallback(
+        ({ target }) => {
+            setFormState({ ...formState, [target.name]: target.value })
+        },
+        [formState]
+    )
     const handleSubmit = useCallback(
         e => {
             e.preventDefault()
             const form = e.target
-            submitFOrm(form, state)
+            submitForm(form, formState)
         },
-        [state]
+        [formState]
     )
 
     return (
@@ -69,29 +78,21 @@ export default function Contact({ location, ...other }) {
                             <label>
                                 Your name:
                                 <br />
-                                <input type="text" name="name" onChange={handleChange} />
+                                <input type="text" autoFocus name="name" onChange={handleChange} />
                             </label>
                         </div>
                         <div>
                             <label>
                                 Your email:
                                 <br />
-                                <input type="email" name="email" onChange={handleChange} />
+                                <input type="email" minLength={5} name="email" onChange={handleChange} />
                             </label>
                         </div>
                         <div>
                             <label>
                                 Message:
                                 <br />
-                                <textarea
-                                    name="message"
-                                    onChange={handleChange}
-                                    value={
-                                        (queryStr.name &&
-                                            `Hi, I'm interested to know more about your ${queryStr.name}. Please contact me on the email address above.`) ||
-                                        ""
-                                    }
-                                />
+                                <textarea name="message" onChange={handleChange} defaultValue={defaultMessage} />
                             </label>
                         </div>
                         <div>
@@ -103,36 +104,3 @@ export default function Contact({ location, ...other }) {
         </Layout>
     )
 }
-
-// class Contact extends React.Component {
-//     render() {
-//         return (
-//             <Layout>
-//                 <div className="Contact-us">
-//                     <div className="container">
-//                         {/* To make form work, use your own formspree credentials in action="" */}
-//                         <form action="https://formspree.io/youremail@domain.com" method="POST" name="contact">
-//                             <div>
-//                                 <label>Your Name: </label>
-//                                 <input type="text" name="name" />
-//                             </div>
-//                             <div>
-//                                 <label>Your Email: </label>
-//                                 <input type="email" name="email" />
-//                             </div>
-//                             <div>
-//                                 <label>Message: </label>
-//                                 <textarea name="message"></textarea>
-//                             </div>
-//                             <div>
-//                                 <button type="submit">Send</button>
-//                             </div>
-//                         </form>
-//                     </div>
-//                 </div>
-//             </Layout>
-//         )
-//     }
-// }
-
-// export default Contact
