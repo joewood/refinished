@@ -39,6 +39,7 @@ export default function Contact({ location, ...other }) {
             `Hi, I'm interested to know more about your ${queryStr.name}. Please contact me on the email address above.`) ||
         ""
     const [formState, setFormState] = useState({ message: defaultMessage })
+    console.log("Form", formState)
     const handleChange = useCallback(
         ({ target }) => {
             setFormState({ ...formState, [target.name]: target.value })
