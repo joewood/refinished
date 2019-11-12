@@ -40,7 +40,10 @@ const ProductDetails = data => (
                         <span className="price">Price: ${data.data.contentfulProduct.price}</span>
                     </div>
                     <div className="col-sm-10 text-left">
-                        <a href="/contact-us" className="Product snipcart-add-item" data-item-url={`/`}>
+                        <a
+                            href={"/contact-us?name=" + encodeURIComponent(data.data.contentfulProduct.name)}
+                            className="Product"
+                        >
                             <i className="fas fa-tags" />
                             Contact Us
                         </a>

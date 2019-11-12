@@ -45,7 +45,7 @@ export const Item = ({ node }) => {
                         <span className="price">${node.price || 0}</span>
                     </div>
                     <div style={{ flex: "0 0 auto" }}>
-                        <a href="/contact-us" className="Product snipcart-add-item">
+                        <a href={"/contact-us?name=" + encodeURIComponent(node.name)} className="Product">
                             <i className="fas fa-shopping-bag" />
                             Contact About Item
                         </a>
