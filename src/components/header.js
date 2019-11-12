@@ -14,7 +14,7 @@ const Header = ({ siteTitle }) => (
             <div className="row">
                 <div className="col-sm-12 col-md-4 align-self-center">
                     <Link className="header-logo" to="/">
-                        <img src={logo}></img>
+                        <img src={logo} alt="header"></img>
                     </Link>
                 </div>
                 <div className="col-sm-12 col-md-8 align-self-center">
@@ -41,14 +41,6 @@ const Header = ({ siteTitle }) => (
                                 </Link>
                             </li>
                         </ul>
-                        {/* <div className="header-cart">
-              <Link
-                className="Header__summary snipcart-summary snipcart-checkout"
-                to="#"
-              >
-                <i className="fas fa-cart-plus"></i>
-              </Link>
-            </div> */}
                     </nav>
                 </div>
             </div>

@@ -1,52 +1,30 @@
-import React from "react"
-import { Link } from "gatsby"
-import Img from "gatsby-image"
+import React, { useState, useCallback, useLayoutEffect } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Item } from "../components/item"
+import { graphql } from "gatsby"
 
-class IndexPost extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            NoOfPost: 6,
+const IndexPost = ({ data }) => {
+    const [NoOfPost, setNoOfPost] = useState(6)
+    const handleScroll = useCallback(() => {
+        if (typeof window === "undefined") return
+        if (window.pageYOffset + 1100 > window.outerHeight) {
+            setNoOfPost(NoOfPost + 3)
         }
-        this.handleScroll = this.handleScroll.bind(this)
-    }
-
-    componentDidMount() {
-        window.addEventListener("scroll", this.handleScroll)
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("scroll", this.handleScroll)
-    }
-
-    handleScroll = () => {
-        var lastScrollY = window.pageYOffset + 1100
-
-        if (lastScrollY > window.outerHeight) {
-            var count = this.state.NoOfPost + 3
-            this.setState({
-                NoOfPost: count,
-            })
+    }, [NoOfPost])
+    useLayoutEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
         }
-    }
-
-    render() {
-        const { data } = this.props
-        const { NoOfPost } = this.state
-
-        return (
-            <React.Fragment>
-                <div className="row product-main" onScroll={this.onScrollEvent}>
-                    {data.data.allContentfulProduct.edges.slice(0, NoOfPost).map(({ node }) => (
-                        <Item node={node} />
-                    ))}
-                </div>
-            </React.Fragment>
-        )
-    }
+    }, [handleScroll])
+    return (
+        <div className="row product-main">
+            {data.data.allContentfulProduct.edges.slice(0, NoOfPost).map(({ node }) => (
+                <Item node={node} />
+            ))}
+        </div>
+    )
 }
 
 const IndexPage = data => (

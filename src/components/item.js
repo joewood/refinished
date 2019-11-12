@@ -1,5 +1,5 @@
-import React, { useCallback } from "react"
-import { Link, graphql, history } from "gatsby"
+import React from "react"
+import { Link } from "gatsby"
 import Img from "gatsby-image"
 
 export const Item = ({ node }) => {
@@ -45,7 +45,7 @@ export const Item = ({ node }) => {
                         <span className="price">${node.price || 0}</span>
                     </div>
                     <div style={{ flex: "0 0 auto" }}>
-                        <a href="#" className="Product snipcart-add-item">
+                        <a href="/contact-us" className="Product snipcart-add-item">
                             <i className="fas fa-shopping-bag" />
                             Contact About Item
                         </a>
