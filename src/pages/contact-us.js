@@ -39,7 +39,7 @@ export default function Contact({ location, ...other }) {
             `Hi, I'm interested to know more about your ${queryStr.name}. Please contact me on the email address above.`) ||
         ""
     const [formState, setFormState] = useState({ message: defaultMessage })
-    console.log("Form", formState)
+    // console.log("Form", formState)
     const handleChange = useCallback(
         ({ target }) => {
             setFormState({ ...formState, [target.name]: target.value })
@@ -79,21 +79,33 @@ export default function Contact({ location, ...other }) {
                             <label>
                                 Your name:
                                 <br />
-                                <input type="text" autoFocus name="name" onChange={handleChange} />
+                                <input
+                                    type="text"
+                                    autoFocus
+                                    name="name"
+                                    onChange={handleChange}
+                                    value={formState.name}
+                                />
                             </label>
                         </div>
                         <div>
                             <label>
                                 Your email:
                                 <br />
-                                <input type="email" minLength={5} name="email" onChange={handleChange} />
+                                <input
+                                    type="email"
+                                    minLength={5}
+                                    name="email"
+                                    onChange={handleChange}
+                                    value={formState.email}
+                                />
                             </label>
                         </div>
-                        <div>
+                        <div key="message">
                             <label>
                                 Message:
                                 <br />
-                                <textarea name="message" onChange={handleChange} defaultValue={defaultMessage} />
+                                <textarea name="message" onChange={handleChange} value={formState.message} />
                             </label>
                         </div>
                         <div>

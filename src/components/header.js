@@ -4,7 +4,6 @@ import React from "react"
 import "../css/font-awesome.css"
 import "bootstrap/dist/css/bootstrap.css"
 import "../css/style.css"
-import SEO from "../components/seo"
 import logo from "../images/refined-refinished.png"
 
 const Header = ({ siteTitle }) => (
