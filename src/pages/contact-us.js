@@ -1,7 +1,7 @@
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 import { navigate } from "gatsby-link"
 import q from "query-string"
 
@@ -34,12 +34,13 @@ async function submitForm(form, formState) {
 
 export default function Contact({ location, ...other }) {
     const queryStr = (location.search && q.parse(location.search)) || {}
-    const defaultMessage =
-        (queryStr.name &&
-            `Hi, I'm interested to know more about your ${queryStr.name}. Please contact me on the email address above.`) ||
-        ""
-    const [formState, setFormState] = useState({ message: defaultMessage })
-    // console.log("Form", formState)
+    const [formState, setFormState] = useState({})
+    useEffect(() => {
+        setFormState({
+            ...formState,
+            message: `Hi, I'm interested to know more about your ${queryStr.name}. Please contact me on the email address above.`,
+        })
+    }, [queryStr.name])
     const handleChange = useCallback(
         ({ target }) => {
             setFormState({ ...formState, [target.name]: target.value })
