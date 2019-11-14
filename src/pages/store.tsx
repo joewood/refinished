@@ -3,16 +3,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Item } from "../components/item"
 import { graphql } from "gatsby"
+import { StoreQueryQuery } from "../generated/graphql"
 
 interface Props {
-    data: {
-        allContentfulHeaderBanner: {
-            edges: any[]
-        }
-        allContentfulProduct: {
-            edges: any[]
-        }
-    }
+    data: StoreQueryQuery
 }
 
 const IndexPost: React.FC<{ data: Props }> = ({ data }) => {
@@ -32,7 +26,7 @@ const IndexPost: React.FC<{ data: Props }> = ({ data }) => {
     return (
         <div className="row product-main">
             {data.data.allContentfulProduct.edges.slice(0, NoOfPost).map(({ node }) => (
-                <Item node={node} />
+                <Item node={node as any} />
             ))}
         </div>
     )

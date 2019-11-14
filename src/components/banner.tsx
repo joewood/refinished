@@ -1,7 +1,8 @@
+import { Link } from "gatsby"
+import Img from "gatsby-image"
 import React from "react"
 import Slider from "react-slick"
-import Img from "gatsby-image"
-import { Link } from "gatsby"
+import { ContentfulHeaderBanner } from "../generated/graphql"
 
 const settings = {
     dots: true,
@@ -14,20 +15,20 @@ const settings = {
 }
 
 interface Props {
-    BannerData: any[]
+    bannerData: ContentfulHeaderBanner[]
 }
 
-const Banner: React.FC<Props> = ({ BannerData }) => (
+const Banner: React.FC<Props> = ({ bannerData }) => (
     <div className="slider-section">
         <Slider {...settings}>
-            {BannerData.map((items, i) => (
+            {bannerData.map((banner, i) => (
                 <div key={i} className="item">
                     <div className="site-Banner">
-                        <Img sizes={items.node.image.fluid} alt={items.node.id} />
+                        <Img sizes={banner.image!.fluid as any} alt={banner.id} />
                         <div className="Banner-details">
                             <div>
-                                <span className="sub-title">{items.node.subHeading}</span>
-                                <h1>{items.node.title}</h1>
+                                <span className="sub-title">{banner.subHeading}</span>
+                                <h1>{banner.title}</h1>
                                 <Link to="/store">Shop Now</Link>
                             </div>
                         </div>

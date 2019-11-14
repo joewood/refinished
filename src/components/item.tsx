@@ -1,9 +1,10 @@
 import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
+import { ContentfulProduct } from "../generated/graphql"
 
 interface Props {
-    node: any
+    node: ContentfulProduct
 }
 
 export const Item: React.FC<Props> = ({ node }) => {
@@ -14,7 +15,7 @@ export const Item: React.FC<Props> = ({ node }) => {
                     <div className="no-image">No Image</div>
                 ) : (
                     <a href={"/" + node.slug}>
-                        <Img sizes={node.image.fluid || node.image.fixed} />
+                        <Img sizes={(node.image!.fluid as any) || node.image!.fixed} />
                     </a>
                 )}
 
@@ -34,7 +35,7 @@ export const Item: React.FC<Props> = ({ node }) => {
                         paddingRight: 10,
                     }}
                 >
-                    {node.details.childMarkdownRemark.excerpt}
+                    {node.details!.childMarkdownRemark!.excerpt}
                 </p>
                 <div
                     style={{
@@ -49,7 +50,7 @@ export const Item: React.FC<Props> = ({ node }) => {
                         <span className="price">${node.price || 0}</span>
                     </div>
                     <div style={{ flex: "0 0 auto" }}>
-                        <a href={"/contact-us?name=" + encodeURIComponent(node.name)} className="Product">
+                        <a href={"/contact-us?name=" + encodeURIComponent(node.name!)} className="Product">
                             <i className="fas fa-shopping-bag" />
                             Contact About Item
                         </a>

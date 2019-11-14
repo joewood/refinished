@@ -1,31 +1,25 @@
-import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import React from "react"
 import Banner from "../components/banner"
 import { Item } from "../components/item"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import { AboutQueryQuery, ContentfulHeaderBanner } from "../generated/graphql"
 
 interface Props {
-    data: {
-        allContentfulHeaderBanner: {
-            edges: any[]
-        }
-        allContentfulProduct: {
-            edges: any[]
-        }
-    }
+    data: AboutQueryQuery
 }
 
-const IndexPage: React.FC<Props> = data => (
+const IndexPage: React.FC<Props> = ({ data }) => (
     <Layout>
         <SEO title="Home" keywords={[`furniture`, `shop`, `restored`, `classic`]} />
-        <Banner BannerData={data.data.allContentfulHeaderBanner.edges} />
+        <Banner bannerData={data.allContentfulHeaderBanner.edges.map(n => n.node as ContentfulHeaderBanner)} />
         <div className="container">
             <div className="text-center">
                 <h2 className="with-underline">Latest Items</h2>
             </div>
             <div className="row product-main">
-                {data.data.allContentfulProduct.edges.map(items => (
+                {data.allContentfulProduct.edges.map(items => (
                     <Item node={items.node} />
                 ))}
             </div>
