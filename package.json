@@ -5,6 +5,9 @@
     "version": "0.1.0",
     "author": "Joe Wood",
     "dependencies": {
+        "@types/react-helmet": "^5.0.14",
+        "@types/react-slick": "^0.23.4",
+        "@types/react-tabs": "^2.3.1",
         "bootstrap": "^4.3.1",
         "dotenv": "^8.2.0",
         "gatsby": "^2.17.15",
@@ -13,7 +16,8 @@
         "gatsby-plugin-offline": "^3.0.21",
         "gatsby-plugin-react-helmet": "^3.1.15",
         "gatsby-plugin-sharp": "^2.3.0",
-        "gatsby-plugin-snipcart": "^1.1.2",
+        "gatsby-plugin-typegen": "^0.2.0",
+        "gatsby-plugin-typescript": "^2.1.18",
         "gatsby-source-contentful": "^2.1.59",
         "gatsby-source-filesystem": "^2.1.37",
         "gatsby-transformer-remark": "^2.6.35",
@@ -25,10 +29,19 @@
         "react-dom": "^16.12.0",
         "react-helmet": "^5.2.1",
         "react-slick": "^0.25.2",
-        "react-tabs": "^3.0.0"
+        "react-tabs": "^3.0.0",
+        "styled-components": "^4.4.1"
     },
     "devDependencies": {
-        "prettier": "^1.19.1"
+        "@graphql-codegen/cli": "^1.8.3",
+        "@types/react": "^16.9.11",
+        "@types/react-dom": "^16.9.4",
+        "@types/styled-components": "^4.4.0",
+        "prettier": "^1.19.1",
+        "typescript": "^3.7.2",
+        "@graphql-codegen/typescript": "1.8.3",
+        "@graphql-codegen/typescript-operations": "1.8.3",
+        "@graphql-codegen/typescript-react-apollo": "1.8.3"
     },
     "keywords": [
         "gatsby"
@@ -40,7 +53,8 @@
         "format": "prettier --write src/**/*.{js,jsx}",
         "start": "npm run develop",
         "serve": "gatsby serve",
-        "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+        "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+        "generate": "graphql-codegen --config codegen.yml"
     },
     "repository": {
         "type": "git",

@@ -6,7 +6,11 @@ import "bootstrap/dist/css/bootstrap.css"
 import "../css/style.css"
 import logo from "../images/refined-refinished.png"
 
-const Header = ({ siteTitle }) => (
+interface Props {
+    siteTitle?: string
+}
+
+const Header: React.FC<Props> = ({ siteTitle }) => (
     <header className="site-header">
         <div className="container">
             <div className="row">
@@ -45,10 +49,6 @@ const Header = ({ siteTitle }) => (
         </div>
     </header>
 )
-
-Header.propTypes = {
-    siteTitle: PropTypes.string,
-}
 
 Header.defaultProps = {
     siteTitle: ``,

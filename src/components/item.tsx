@@ -2,7 +2,11 @@ import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 
-export const Item = ({ node }) => {
+interface Props {
+    node: any
+}
+
+export const Item: React.FC<Props> = ({ node }) => {
     return (
         <div className="Catalogue__item col-sm-12 col-md-6 col-lg-4" key={node.id}>
             <div className="details_List">

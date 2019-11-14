@@ -5,7 +5,18 @@ import SEO from "../components/seo"
 import Banner from "../components/banner"
 import { Item } from "../components/item"
 
-const IndexPage = data => (
+interface Props {
+    data: {
+        allContentfulHeaderBanner: {
+            edges: any[]
+        }
+        allContentfulProduct: {
+            edges: any[]
+        }
+    }
+}
+
+const IndexPage: React.FC<Props> = data => (
     <Layout>
         <SEO title="Home" keywords={[`furniture`, `shop`, `restored`, `classic`]} />
         <Banner BannerData={data.data.allContentfulHeaderBanner.edges} />

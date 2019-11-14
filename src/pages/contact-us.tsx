@@ -5,13 +5,13 @@ import React, { useState, useCallback, useEffect } from "react"
 import { navigate } from "gatsby-link"
 import q from "query-string"
 
-function encode(data) {
+function encode(data: Object) {
     return Object.keys(data)
         .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
         .join("&")
 }
 
-async function submitForm(form, formState) {
+async function submitForm(form: HTMLFormElement, formState: FormState) {
     try {
         const body = encode({
             "form-name": form.getAttribute("name"),
@@ -26,15 +26,26 @@ async function submitForm(form, formState) {
                 ...formState,
             }),
         })
-        navigate(form.getAttribute("action"))
+        const target = form.getAttribute("action")
+        if (typeof target === "string") navigate(target)
     } catch (e) {
         navigate("/")
     }
 }
 
-export default function Contact({ location, ...other }) {
+interface Props {
+    location: any
+}
+
+interface FormState {
+    message?: string
+    name?: string
+    email?: string
+}
+
+export const Contact: React.FC<Props> = ({ location, ...other }) => {
     const queryStr = (location.search && q.parse(location.search)) || {}
-    const [formState, setFormState] = useState({})
+    const [formState, setFormState] = useState<FormState>({})
     useEffect(() => {
         setFormState({
             ...formState,
@@ -48,9 +59,9 @@ export default function Contact({ location, ...other }) {
         [formState]
     )
     const handleSubmit = useCallback(
-        e => {
+        (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault()
-            const form = e.target
+            const form = e.target as HTMLFormElement
             submitForm(form, formState)
         },
         [formState]
@@ -118,3 +129,5 @@ export default function Contact({ location, ...other }) {
         </Layout>
     )
 }
+
+export default Contact

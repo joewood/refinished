@@ -13,7 +13,11 @@ const settings = {
     slidesToScroll: 1,
 }
 
-const Banner = ({ BannerData }) => (
+interface Props {
+    BannerData: any[]
+}
+
+const Banner: React.FC<Props> = ({ BannerData }) => (
     <div className="slider-section">
         <Slider {...settings}>
             {BannerData.map((items, i) => (

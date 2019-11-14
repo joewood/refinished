@@ -4,7 +4,18 @@ import SEO from "../components/seo"
 import { Item } from "../components/item"
 import { graphql } from "gatsby"
 
-const IndexPost = ({ data }) => {
+interface Props {
+    data: {
+        allContentfulHeaderBanner: {
+            edges: any[]
+        }
+        allContentfulProduct: {
+            edges: any[]
+        }
+    }
+}
+
+const IndexPost: React.FC<{ data: Props }> = ({ data }) => {
     const [NoOfPost, setNoOfPost] = useState(6)
     const handleScroll = useCallback(() => {
         if (typeof window === "undefined") return
@@ -27,7 +38,7 @@ const IndexPost = ({ data }) => {
     )
 }
 
-const IndexPage = data => (
+const IndexPage: React.FC<Props> = data => (
     <Layout>
         <SEO title="Store" keywords={[`gatsby`, `application`, `react`]} />
         <div className="container store-page">

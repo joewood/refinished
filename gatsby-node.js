@@ -1,7 +1,7 @@
 var path = require("path")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
-    const StoreTemplate = path.resolve("src/templates/details.js")
+    const storeTemplate = path.resolve("src/templates/details.tsx")
     const { errors, data } = await graphql(`
         {
             allContentfulProduct {
@@ -15,12 +15,12 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         }
     `)
     if (errors) {
-        throw Error(result.errors)
+        throw Error(errors)
     }
     for (const edge of data.allContentfulProduct.edges) {
         createPage({
             path: edge.node.slug,
-            component: StoreTemplate,
+            component: storeTemplate,
             context: {
                 slug: edge.node.slug,
             },
